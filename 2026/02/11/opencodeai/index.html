@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"soooocold.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="OpenCode 是什么？OpenCode 是一个开源的 AI 编程助手，可以运行在终端、桌面应用或 IDE 扩展中。它不是另一个闭源的 AI 编程工具，而是真正开源透明的选择。 核心特点：  100,000+ GitHub Stars — 开源社区的认可 700+ 贡献者 — 活跃的开发者社区 2,500,000+ 月活开发者 — 被广泛使用 9,000+ Commits — 持续迭代  为什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCode：开源 AI 编程助手完全指南">
+<meta property="og:url" content="https://soooocold.github.io/2026/02/11/opencodeai/index.html">
+<meta property="og:site_name" content="YunDuan">
+<meta property="og:description" content="OpenCode 是什么？OpenCode 是一个开源的 AI 编程助手，可以运行在终端、桌面应用或 IDE 扩展中。它不是另一个闭源的 AI 编程工具，而是真正开源透明的选择。 核心特点：  100,000+ GitHub Stars — 开源社区的认可 700+ 贡献者 — 活跃的开发者社区 2,500,000+ 月活开发者 — 被广泛使用 9,000+ Commits — 持续迭代  为什么">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-11T13:34:14.000Z">
+<meta property="article:modified_time" content="2026-02-11T13:34:14.182Z">
+<meta property="article:author" content="YunDuan">
+<meta property="article:tag" content="OpenCode">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="编程工具">
+<meta name="twitter:card" content="summary">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+
+
+<link rel="canonical" href="https://soooocold.github.io/2026/02/11/opencodeai/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://soooocold.github.io/2026/02/11/opencodeai/","path":"2026/02/11/opencodeai/","title":"OpenCode：开源 AI 编程助手完全指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>OpenCode：开源 AI 编程助手完全指南 | YunDuan</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YunDuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenCode-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">OpenCode 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-OpenCode%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">为什么选择 OpenCode？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9A%90%E7%A7%81%E4%BC%98%E5%85%88"><span class="nav-number">2.1.</span> <span class="nav-text">1. 隐私优先</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%BB%E6%84%8F%E6%A8%A1%E5%9E%8B%E6%94%AF%E6%8C%81"><span class="nav-number">2.2.</span> <span class="nav-text">2. 任意模型支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%9A%E7%AB%AF%E5%8F%AF%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">3. 多端可用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%8A%9F%E8%83%BD"><span class="nav-number">2.4.</span> <span class="nav-text">4. 企业级功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">安装方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">方式一：安装脚本（推荐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9ANode-js"><span class="nav-number">3.2.</span> <span class="nav-text">方式二：Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%89%EF%BC%9AHomebrew%EF%BC%88macOS-x2F-Linux%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">方式三：Homebrew（macOS&#x2F;Linux）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E5%9B%9B%EF%BC%9ADocker"><span class="nav-number">3.4.</span> <span class="nav-text">方式四：Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%94%EF%BC%9A%E5%85%B6%E4%BB%96%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">3.5.</span> <span class="nav-text">方式五：其他包管理器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="nav-number">4.</span> <span class="nav-text">快速上手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE-API-Key"><span class="nav-number">4.1.</span> <span class="nav-text">1. 配置 API Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.2.</span> <span class="nav-text">2. 初始化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text">3. 开始使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">使用场景示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%80%EF%BC%9A%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%E5%BA%93"><span class="nav-number">5.1.</span> <span class="nav-text">场景一：理解代码库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%EF%BC%9A%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%8A%9F%E8%83%BD"><span class="nav-number">5.2.</span> <span class="nav-text">场景二：添加新功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%89%EF%BC%9A%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81"><span class="nav-number">5.3.</span> <span class="nav-text">场景三：直接修改代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%9B%9B%EF%BC%9A%E6%92%A4%E9%94%80%E6%9B%B4%E6%94%B9"><span class="nav-number">5.4.</span> <span class="nav-text">场景四：撤销更改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">进阶配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LSP-%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD"><span class="nav-number">6.1.</span> <span class="nav-text">LSP 自动加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E5%88%86%E4%BA%AB"><span class="nav-number">6.2.</span> <span class="nav-text">会话分享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%80%89%E9%A1%B9"><span class="nav-number">6.3.</span> <span class="nav-text">自定义选项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zen%EF%BC%9A%E7%BB%8F%E8%BF%87%E9%AA%8C%E8%AF%81%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">Zen：经过验证的模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94"><span class="nav-number">8.</span> <span class="nav-text">与其他工具对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">9.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">YunDuan</p>
+  <div class="site-description" itemprop="description">试过才知道</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/cc_zero.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://soooocold.github.io/2026/02/11/opencodeai/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YunDuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunDuan">
+      <meta itemprop="description" content="试过才知道">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="OpenCode：开源 AI 编程助手完全指南 | YunDuan">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenCode：开源 AI 编程助手完全指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-11 21:34:14" itemprop="dateCreated datePublished" datetime="2026-02-11T21:34:14+08:00">2026-02-11</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="OpenCode：开源 AI 编程助手完全指南" href="/2026/02/11/opencodeai/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::739fc360aa23a4a9a286458a03882d95" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="OpenCode-是什么？"><a href="#OpenCode-是什么？" class="headerlink" title="OpenCode 是什么？"></a>OpenCode 是什么？</h2><p>OpenCode 是一个开源的 AI 编程助手，可以运行在终端、桌面应用或 IDE 扩展中。它不是另一个闭源的 AI 编程工具，而是真正开源透明的选择。</p>
+<p><strong>核心特点：</strong></p>
+<ul>
+<li><strong>100,000+ GitHub Stars</strong> — 开源社区的认可</li>
+<li><strong>700+ 贡献者</strong> — 活跃的开发者社区</li>
+<li><strong>2,500,000+ 月活开发者</strong> — 被广泛使用</li>
+<li><strong>9,000+ Commits</strong> — 持续迭代</li>
+</ul>
+<h2 id="为什么选择-OpenCode？"><a href="#为什么选择-OpenCode？" class="headerlink" title="为什么选择 OpenCode？"></a>为什么选择 OpenCode？</h2><h3 id="1-隐私优先"><a href="#1-隐私优先" class="headerlink" title="1. 隐私优先"></a>1. 隐私优先</h3><p>OpenCode 的核心理念之一是隐私。它<strong>不存储任何代码或上下文数据</strong>，这意味着你可以在敏感环境中安全使用它。对于处理商业机密或个人项目的开发者来说，这一点至关重要。</p>
+<h3 id="2-任意模型支持"><a href="#2-任意模型支持" class="headerlink" title="2. 任意模型支持"></a>2. 任意模型支持</h3><p>OpenCode 不绑定特定模型提供商，你可以：</p>
+<ul>
+<li><strong>免费内置模型</strong> — 开箱即用</li>
+<li><strong>主流模型</strong> — Claude、GPT-4、Gemini 等</li>
+<li><strong>75+ 提供商</strong> — 通过 Models.dev 支持，包括本地模型</li>
+<li><strong>GitHub Copilot</strong> — 直接登录使用你的 Copilot 账户</li>
+<li><strong>ChatGPT Plus&#x2F;Pro</strong> — 直接使用你的 OpenAI 账户</li>
+</ul>
+<h3 id="3-多端可用"><a href="#3-多端可用" class="headerlink" title="3. 多端可用"></a>3. 多端可用</h3><ul>
+<li><strong>终端界面</strong> — 键盘操作，高效编程</li>
+<li><strong>桌面应用</strong> — 独立窗口，更好的视觉体验</li>
+<li><strong>IDE 扩展</strong> — 无缝融入你的开发环境</li>
+</ul>
+<h3 id="4-企业级功能"><a href="#4-企业级功能" class="headerlink" title="4. 企业级功能"></a>4. 企业级功能</h3><ul>
+<li><strong>多会话</strong> — 在同一项目中并行启动多个 agent</li>
+<li><strong>会话分享</strong> — 生成链接分享给团队成员，便于协作和 debug</li>
+<li><strong>Zen 模式</strong> — 经过验证和基准测试的优化模型列表</li>
+</ul>
+<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><p>OpenCode 支持多种安装方式，总有一种适合你。</p>
+<h3 id="方式一：安装脚本（推荐）"><a href="#方式一：安装脚本（推荐）" class="headerlink" title="方式一：安装脚本（推荐）"></a>方式一：安装脚本（推荐）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://opencode.ai/install | bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式二：Node-js"><a href="#方式二：Node-js" class="headerlink" title="方式二：Node.js"></a>方式二：Node.js</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g opencode-ai</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式三：Homebrew（macOS-x2F-Linux）"><a href="#方式三：Homebrew（macOS-x2F-Linux）" class="headerlink" title="方式三：Homebrew（macOS&#x2F;Linux）"></a>方式三：Homebrew（macOS&#x2F;Linux）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install anomalyco/tap/opencode</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式四：Docker"><a href="#方式四：Docker" class="headerlink" title="方式四：Docker"></a>方式四：Docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --<span class="built_in">rm</span> ghcr.io/anomalyco/opencode</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式五：其他包管理器"><a href="#方式五：其他包管理器" class="headerlink" title="方式五：其他包管理器"></a>方式五：其他包管理器</h3><p><strong>Arch Linux：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S opencode-bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>Windows Chocolatey：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install opencode</span><br></pre></td></tr></table></figure>
+
+<p><strong>Windows Scoop：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop install opencode</span><br></pre></td></tr></table></figure>
+
+<p><strong>Windows npm：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g opencode-ai</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 Mise：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mise use -g github:anomalyco/opencode</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><h3 id="1-配置-API-Key"><a href="#1-配置-API-Key" class="headerlink" title="1. 配置 API Key"></a>1. 配置 API Key</h3><p>首次使用需要配置模型提供商的 API Key：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opencode</span><br></pre></td></tr></table></figure>
+
+<p>在 TUI 中运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/connect</span><br></pre></td></tr></table></figure>
+
+<p>然后访问 <a target="_blank" rel="noopener" href="https://opencode.ai/auth">https://opencode.ai/auth</a> 登录并获取 API Key。</p>
+<p>如果你不确定选择哪个模型，推荐使用 <a target="_blank" rel="noopener" href="https://opencode.ai/zen">OpenCode Zen</a>，它是团队经过测试验证的优化模型列表。</p>
+<h3 id="2-初始化项目"><a href="#2-初始化项目" class="headerlink" title="2. 初始化项目"></a>2. 初始化项目</h3><p>进入你的项目目录并初始化 OpenCode：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/your/project</span><br><span class="line">opencode</span><br><span class="line">/init</span><br></pre></td></tr></table></figure>
+
+<p>初始化会分析你的项目结构并创建 <code>AGENTS.md</code> 文件，帮助 OpenCode 理解项目架构和编码规范。</p>
+<h3 id="3-开始使用"><a href="#3-开始使用" class="headerlink" title="3. 开始使用"></a>3. 开始使用</h3><p>现在你可以开始与 OpenCode 对话了！</p>
+<h2 id="使用场景示例"><a href="#使用场景示例" class="headerlink" title="使用场景示例"></a>使用场景示例</h2><h3 id="场景一：理解代码库"><a href="#场景一：理解代码库" class="headerlink" title="场景一：理解代码库"></a>场景一：理解代码库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">How is authentication handled in @packages/functions/src/api/index.ts</span><br></pre></td></tr></table></figure>
+
+<p>OpenCode 会分析指定文件并解释认证逻辑，非常适合接手他人项目时快速了解代码。</p>
+<h3 id="场景二：添加新功能"><a href="#场景二：添加新功能" class="headerlink" title="场景二：添加新功能"></a>场景二：添加新功能</h3><p><strong>Step 1：创建计划（Plan Mode）</strong></p>
+<p>按 Tab 键切换到 Plan 模式，然后描述你想要的功能：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">When a user deletes a note, we&#x27;d like to flag it as deleted in the database.</span><br><span class="line">Then create a screen that shows all the recently deleted notes.</span><br><span class="line">From this screen, the user can undelete a note or permanently delete it.</span><br></pre></td></tr></table></figure>
+
+<p>OpenCode 会生成详细的实现计划，你可以迭代修改。</p>
+<p><strong>Step 2：添加设计参考</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Take a look at this image and use it as a reference.</span><br></pre></td></tr></table></figure>
+
+<p>直接拖拽图片到终端，OpenCode 会扫描图像并将其纳入提示词。</p>
+<p><strong>Step 3：构建功能（Build Mode）</strong></p>
+<p>确认计划后，按 Tab 切换回 Build 模式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sounds good! Go ahead and make the changes.</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景三：直接修改代码"><a href="#场景三：直接修改代码" class="headerlink" title="场景三：直接修改代码"></a>场景三：直接修改代码</h3><p>对于简单的修改，可以直接让 OpenCode 执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">We need to add authentication to the /settings route.</span><br><span class="line">Take a look at how this is handled in the /notes route in</span><br><span class="line">@packages/functions/src/notes.ts and implement the same logic in</span><br><span class="line">@packages/functions/src/settings.ts</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景四：撤销更改"><a href="#场景四：撤销更改" class="headerlink" title="场景四：撤销更改"></a>场景四：撤销更改</h3><p>如果 OpenCode 的修改不符合预期，可以使用撤销：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/undo  # 撤销上次修改</span><br><span class="line">/redo  # 重做</span><br></pre></td></tr></table></figure>
+
+<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><h3 id="LSP-自动加载"><a href="#LSP-自动加载" class="headerlink" title="LSP 自动加载"></a>LSP 自动加载</h3><p>OpenCode 会自动为你的项目加载正确的语言服务器（LSP），无需手动配置。</p>
+<h3 id="会话分享"><a href="#会话分享" class="headerlink" title="会话分享"></a>会话分享</h3><p>与团队成员分享当前对话：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/share</span><br></pre></td></tr></table></figure>
+
+<p>这会生成一个链接，你可以发送给队友，他们可以查看完整的对话历史和上下文。</p>
+<h3 id="自定义选项"><a href="#自定义选项" class="headerlink" title="自定义选项"></a>自定义选项</h3><p>OpenCode 提供了丰富的自定义选项：</p>
+<ul>
+<li><strong>主题</strong> — 切换外观配色</li>
+<li><strong>快捷键</strong> — 自定义按键绑定</li>
+<li><strong>代码格式化</strong> — 配置格式化工具</li>
+<li><strong>自定义命令</strong> — 创建常用命令</li>
+<li><strong>配置文件</strong> — 详细的行为配置</li>
+</ul>
+<h2 id="Zen：经过验证的模型"><a href="#Zen：经过验证的模型" class="headerlink" title="Zen：经过验证的模型"></a>Zen：经过验证的模型</h2><p>如果你对模型选择感到困惑，Zen 提供了经过 OpenCode 团队严格测试和基准测试的优化模型列表。这些模型在编程任务中表现一致且高质量，省去了你自己筛选和测试的麻烦。</p>
+<h2 id="与其他工具对比"><a href="#与其他工具对比" class="headerlink" title="与其他工具对比"></a>与其他工具对比</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>OpenCode</th>
+<th>GitHub Copilot</th>
+<th>Cursor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开源</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>隐私优先</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>多模型支持</td>
+<td>✅ 75+</td>
+<td>仅 OpenAI</td>
+<td>主要 Claude</td>
+</tr>
+<tr>
+<td>自托管</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>免费使用</td>
+<td>✅</td>
+<td>❌</td>
+<td>有限制</td>
+</tr>
+<tr>
+<td>多会话</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody></table>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>OpenCode 特别适合以下场景：</p>
+<ol>
+<li><strong>隐私敏感项目</strong> — 金融、医疗、企业内部应用</li>
+<li><strong>多模型需求</strong> — 需要根据任务切换不同模型</li>
+<li><strong>团队协作</strong> — 会话分享功能便于代码审查</li>
+<li><strong>预算有限</strong> — 免费内置模型可用</li>
+<li><strong>技术极客</strong> — 开源、可定制、可自托管</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>OpenCode 代表了 AI 编程工具的一个新方向：开源、隐私优先、灵活自由。它不是要取代你的思考，而是像一位随时待命的初级开发者，听从你的指令，执行具体任务。</p>
+<p>如果你正在寻找一个可以完全掌控、隐私安全、多模型支持的 AI 编程助手，OpenCode 值得一试。</p>
+<hr>
+<p><em>参考资料：</em></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://opencode.ai/">OpenCode 官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://opencode.ai/docs">OpenCode 文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/opencode-ai/opencode">OpenCode GitHub</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>YunDuan
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://soooocold.github.io/2026/02/11/opencodeai/" title="OpenCode：开源 AI 编程助手完全指南">https://soooocold.github.io/2026/02/11/opencodeai/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>CC-ZERO</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/OpenCode/" rel="tag"># OpenCode</a>
+              <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/" rel="tag"># 编程工具</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/02/11/OpenClaw-%E9%83%A8%E7%BD%B2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" rel="prev" title="OpenClaw 部署完全指南：从零搭建你的个人 AI 助手">
+                  <i class="fa fa-angle-left"></i> OpenClaw 部署完全指南：从零搭建你的个人 AI 助手
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="739fc360aa23a4a9a286458a03882d95"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YunDuan</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyxf3v9O3","appkey":"94960132a440cb57ffff1e4bd6418e12","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
