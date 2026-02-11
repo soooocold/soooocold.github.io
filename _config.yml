@@ -107,4 +107,4 @@ theme: next
 deploy:
   type: git
   repository: git@github.com:soooocold/soooocold.github.io.git
-  branch: hexo
+  branch: main
