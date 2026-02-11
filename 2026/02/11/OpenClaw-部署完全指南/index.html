@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"soooocold.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="OpenClaw 是一个运行在自有设备上的个人 AI 助手，支持多平台、多渠道（WhatsApp、Telegram、Slack、Discord 等）。本文详细介绍几种主流部署方式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenClaw 部署完全指南：从零搭建你的个人 AI 助手">
+<meta property="og:url" content="https://soooocold.github.io/2026/02/11/OpenClaw-%E9%83%A8%E7%BD%B2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="YunDuan">
+<meta property="og:description" content="OpenClaw 是一个运行在自有设备上的个人 AI 助手，支持多平台、多渠道（WhatsApp、Telegram、Slack、Discord 等）。本文详细介绍几种主流部署方式。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-11T13:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-11T13:11:49.168Z">
+<meta property="article:author" content="YunDuan">
+<meta property="article:tag" content="OpenClaw">
+<meta property="article:tag" content="AI Assistant">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<link rel="publisher" href="%3Cg+:profile_link%3E">
+
+
+<link rel="canonical" href="https://soooocold.github.io/2026/02/11/OpenClaw-%E9%83%A8%E7%BD%B2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://soooocold.github.io/2026/02/11/OpenClaw-%E9%83%A8%E7%BD%B2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/","path":"2026/02/11/OpenClaw-部署完全指南/","title":"OpenClaw 部署完全指南：从零搭建你的个人 AI 助手"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>OpenClaw 部署完全指南：从零搭建你的个人 AI 助手 | YunDuan</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YunDuan</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenClaw-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">OpenClaw 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%89%8D%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">安装前准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E6%9C%AC%E5%9C%B0-CLI-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%EF%BC%88%E6%9C%80%E7%AE%80%E5%8D%95%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">方式一：本地 CLI 快速部署（最简单）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-OpenClaw"><span class="nav-number">3.1.</span> <span class="nav-text">1. 安装 OpenClaw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BF%90%E8%A1%8C%E5%90%91%E5%AF%BC"><span class="nav-number">3.2.</span> <span class="nav-text">2. 运行向导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%90%AF%E5%8A%A8-Gateway"><span class="nav-number">3.3.</span> <span class="nav-text">3. 启动 Gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%AA%8C%E8%AF%81%E9%83%A8%E7%BD%B2"><span class="nav-number">3.4.</span> <span class="nav-text">4. 验证部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9ADocker-%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">方式二：Docker 容器化部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8"><span class="nav-number">4.1.</span> <span class="nav-text">快速启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8-Docker-%E9%83%A8%E7%BD%B2"><span class="nav-number">4.2.</span> <span class="nav-text">手动 Docker 部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-Docker-%E5%91%BD%E4%BB%A4"><span class="nav-number">4.3.</span> <span class="nav-text">常用 Docker 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.4.</span> <span class="nav-text">Docker 环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98"><span class="nav-number">4.5.</span> <span class="nav-text">权限问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%89%EF%BC%9ALinux-VPS-%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2"><span class="nav-number">5.</span> <span class="nav-text">方式三：Linux VPS 远程部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-Node-22"><span class="nav-number">5.1.</span> <span class="nav-text">1. 安装 Node 22+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AE-OpenClaw"><span class="nav-number">5.2.</span> <span class="nav-text">2. 安装并配置 OpenClaw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AE%BE%E7%BD%AE-systemd-%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.3.</span> <span class="nav-text">3. 设置 systemd 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%EF%BC%88SSH-%E9%9A%A7%E9%81%93%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">4. 远程访问（SSH 隧道）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%85%AC%E7%BD%91%E6%9A%B4%E9%9C%B2%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">5. 公网暴露（可选）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E5%9B%9B%EF%BC%9A%E4%BB%8E%E6%BA%90%E7%A0%81%E5%BC%80%E5%8F%91%E9%83%A8%E7%BD%B2"><span class="nav-number">6.</span> <span class="nav-text">方式四：从源码开发部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Agent-%E6%B2%99%E7%AE%B1%EF%BC%88Sandboxing%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">Agent 沙箱（Sandboxing）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="nav-number">8.</span> <span class="nav-text">常用命令速查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">9.</span> <span class="nav-text">常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">YunDuan</p>
+  <div class="site-description" itemprop="description">试过才知道</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/cc_zero.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://soooocold.github.io/2026/02/11/OpenClaw-%E9%83%A8%E7%BD%B2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YunDuan">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunDuan">
+      <meta itemprop="description" content="试过才知道">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="OpenClaw 部署完全指南：从零搭建你的个人 AI 助手 | YunDuan">
+      <meta itemprop="description" content="OpenClaw 是一个运行在自有设备上的个人 AI 助手，支持多平台、多渠道（WhatsApp、Telegram、Slack、Discord 等）。本文详细介绍几种主流部署方式。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenClaw 部署完全指南：从零搭建你的个人 AI 助手
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-11 21:00:00 / 修改时间：21:11:49" itemprop="dateCreated datePublished" datetime="2026-02-11T21:00:00+08:00">2026-02-11</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="OpenClaw 部署完全指南：从零搭建你的个人 AI 助手" href="/2026/02/11/OpenClaw-%E9%83%A8%E7%BD%B2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::a43ea9c897de2185295b870ad661b97f" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">OpenClaw 是一个运行在自有设备上的个人 AI 助手，支持多平台、多渠道（WhatsApp、Telegram、Slack、Discord 等）。本文详细介绍几种主流部署方式。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>OpenClaw 是一个运行在自有设备上的个人 AI 助手，支持多平台、多渠道（WhatsApp、Telegram、Slack、Discord 等），可以在 macOS、Linux、Windows、iOS、Android 上运行。本文详细介绍几种主流部署方式，帮助你快速上手。</p>
+<h2 id="OpenClaw-是什么？"><a href="#OpenClaw-是什么？" class="headerlink" title="OpenClaw 是什么？"></a>OpenClaw 是什么？</h2><p>OpenClaw 是本地优先（local-first）的 AI 助手框架，核心是 <strong>Gateway</strong> 控制平面 + <strong>Agent</strong> 运行时。它不是云服务，而是跑在你自己的机器上，所有数据、配置、密钥都在本地。</p>
+<p><strong>核心特性：</strong></p>
+<ul>
+<li>多渠道接入：WhatsApp、Telegram、Slack、Discord、Google Chat、Signal、iMessage、Teams、Matrix 等</li>
+<li>跨平台：macOS&#x2F;Linux&#x2F;Windows&#x2F;iOS&#x2F;Android</li>
+<li>多 Agent 路由：可为一对一&#x2F;群组&#x2F;不同场景配置不同 Agent</li>
+<li>安全模型：DM 配对机制、Agent 沙箱、工具权限控制</li>
+<li>语音唤醒 + Talk 模式：支持 macOS&#x2F;iOS&#x2F;Android</li>
+</ul>
+<h2 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h2><p><strong>运行时要求：</strong></p>
+<ul>
+<li>Node.js ≥ 22</li>
+<li>推荐 pnpm（也可以用 npm 或 bun，但 Bun 对 Gateway 有兼容问题）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查 Node 版本</span></span><br><span class="line">node -v  <span class="comment"># 需要 v22+</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 pnpm（推荐）</span></span><br><span class="line">npm install -g pnpm</span><br></pre></td></tr></table></figure>
+
+<h2 id="方式一：本地-CLI-快速部署（最简单）"><a href="#方式一：本地-CLI-快速部署（最简单）" class="headerlink" title="方式一：本地 CLI 快速部署（最简单）"></a>方式一：本地 CLI 快速部署（最简单）</h2><p>适合个人使用，本机运行。</p>
+<h3 id="1-安装-OpenClaw"><a href="#1-安装-OpenClaw" class="headerlink" title="1. 安装 OpenClaw"></a>1. 安装 OpenClaw</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装</span></span><br><span class="line">npm install -g openclaw@latest</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">pnpm add -g openclaw@latest</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-运行向导"><a href="#2-运行向导" class="headerlink" title="2. 运行向导"></a>2. 运行向导</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键安装 Gateway 守护进程并启动向导</span></span><br><span class="line">openclaw onboard --install-daemon</span><br></pre></td></tr></table></figure>
+
+<p>向导会引导你完成：</p>
+<ul>
+<li>Gateway 配置（端口、认证）</li>
+<li>模型选择（推荐 Anthropic Pro&#x2F;Max + Opus 4.6）</li>
+<li>渠道登录（WhatsApp 扫码、Telegram Bot Token 等）</li>
+<li>工作区初始化</li>
+</ul>
+<h3 id="3-启动-Gateway"><a href="#3-启动-Gateway" class="headerlink" title="3. 启动 Gateway"></a>3. 启动 Gateway</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认端口 18789</span></span><br><span class="line">openclaw gateway --port 18789 --verbose</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者使用已安装的 daemon</span></span><br><span class="line">openclaw gateway</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-验证部署"><a href="#4-验证部署" class="headerlink" title="4. 验证部署"></a>4. 验证部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发送测试消息</span></span><br><span class="line">openclaw message send --to +1234567890 --message <span class="string">&quot;Hello from OpenClaw&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 与 Agent 对话</span></span><br><span class="line">openclaw agent --message <span class="string">&quot;Ship checklist&quot;</span> --thinking high</span><br></pre></td></tr></table></figure>
+
+<h2 id="方式二：Docker-容器化部署"><a href="#方式二：Docker-容器化部署" class="headerlink" title="方式二：Docker 容器化部署"></a>方式二：Docker 容器化部署</h2><p>适合需要隔离环境、一次性体验、或在 VPS 上运行。</p>
+<h3 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从仓库根目录运行</span></span><br><span class="line">./docker-setup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 脚本会自动：</span></span><br><span class="line"><span class="comment"># 1. 构建 Gateway 镜像</span></span><br><span class="line"><span class="comment"># 2. 运行向导</span></span><br><span class="line"><span class="comment"># 3. 启动 Docker Compose</span></span><br><span class="line"><span class="comment"># 4. 生成 token 写入 .env</span></span><br></pre></td></tr></table></figure>
+
+<p>完成后访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:18789/%EF%BC%8C%E5%9C%A8">http://127.0.0.1:18789/，在</a> Control UI 中粘贴 token。</p>
+<h3 id="手动-Docker-部署"><a href="#手动-Docker-部署" class="headerlink" title="手动 Docker 部署"></a>手动 Docker 部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">docker build -t openclaw:<span class="built_in">local</span> -f Dockerfile .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行向导</span></span><br><span class="line">docker compose run --<span class="built_in">rm</span> openclaw-cli onboard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 Gateway</span></span><br><span class="line">docker compose up -d openclaw-gateway</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用-Docker-命令"><a href="#常用-Docker-命令" class="headerlink" title="常用 Docker 命令"></a>常用 Docker 命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看日志</span></span><br><span class="line">docker compose logs -f openclaw-gateway</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启服务</span></span><br><span class="line">docker compose restart openclaw-gateway</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取 Dashboard 链接</span></span><br><span class="line">docker compose run --<span class="built_in">rm</span> openclaw-cli dashboard --no-open</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置 WhatsApp（扫码）</span></span><br><span class="line">docker compose run --<span class="built_in">rm</span> openclaw-cli channels login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置 Telegram</span></span><br><span class="line">docker compose run --<span class="built_in">rm</span> openclaw-cli channels add --channel telegram --token <span class="string">&quot;&lt;token&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-环境变量"><a href="#Docker-环境变量" class="headerlink" title="Docker 环境变量"></a>Docker 环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 持久化容器 home 目录</span></span><br><span class="line"><span class="built_in">export</span> OPENCLAW_HOME_VOLUME=<span class="string">&quot;openclaw_home&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载额外目录</span></span><br><span class="line"><span class="built_in">export</span> OPENCLAW_EXTRA_MOUNTS=<span class="string">&quot;<span class="variable">$HOME</span>/.codex:/home/node/.codex:ro,<span class="variable">$HOME</span>/github:/home/node/github:rw&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装系统依赖</span></span><br><span class="line"><span class="built_in">export</span> OPENCLAW_DOCKER_APT_PACKAGES=<span class="string">&quot;ffmpeg git curl jq&quot;</span></span><br><span class="line"></span><br><span class="line">./docker-setup.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h3><p>Docker 镜像以 non-root 用户 node（uid 1000）运行。如果遇到权限错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux 主机上确保挂载目录属于 uid 1000</span></span><br><span class="line">sudo <span class="built_in">chown</span> -R 1000:1000 /path/to/openclaw-config /path/to/openclaw-workspace</span><br></pre></td></tr></table></figure>
+
+<h2 id="方式三：Linux-VPS-远程部署"><a href="#方式三：Linux-VPS-远程部署" class="headerlink" title="方式三：Linux VPS 远程部署"></a>方式三：Linux VPS 远程部署</h2><p>适合 7x24 小时运行，远程访问。</p>
+<h3 id="1-安装-Node-22"><a href="#1-安装-Node-22" class="headerlink" title="1. 安装 Node 22+"></a>1. 安装 Node 22+</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 nvm</span></span><br><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash</span><br><span class="line">nvm install 22</span><br><span class="line">nvm use 22</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或直接安装</span></span><br><span class="line">curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装并配置-OpenClaw"><a href="#2-安装并配置-OpenClaw" class="headerlink" title="2. 安装并配置 OpenClaw"></a>2. 安装并配置 OpenClaw</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g openclaw@latest</span><br><span class="line">openclaw onboard --install-daemon</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-设置-systemd-服务"><a href="#3-设置-systemd-服务" class="headerlink" title="3. 设置 systemd 服务"></a>3. 设置 systemd 服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 向导会自动安装 systemd user unit</span></span><br><span class="line"><span class="comment"># 或手动创建</span></span><br><span class="line"><span class="built_in">cat</span> &gt; ~/.config/systemd/user/openclaw-gateway.service &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[Unit]</span></span><br><span class="line"><span class="string">Description=OpenClaw Gateway</span></span><br><span class="line"><span class="string">After=network-online.target</span></span><br><span class="line"><span class="string">Wants=network-online.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">ExecStart=/usr/local/bin/openclaw gateway --port 18789</span></span><br><span class="line"><span class="string">Restart=always</span></span><br><span class="line"><span class="string">RestartSec=5</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Install]</span></span><br><span class="line"><span class="string">WantedBy=default.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用服务</span></span><br><span class="line">systemctl --user <span class="built_in">enable</span> --now openclaw-gateway</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">systemctl --user status openclaw-gateway</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-远程访问（SSH-隧道）"><a href="#4-远程访问（SSH-隧道）" class="headerlink" title="4. 远程访问（SSH 隧道）"></a>4. 远程访问（SSH 隧道）</h3><p>从本地 laptop 端口转发：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -N -L 18789:127.0.0.1:18789 user@vps-ip</span><br></pre></td></tr></table></figure>
+
+<p>然后本地浏览器访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:18789/">http://127.0.0.1:18789/</a> 即可控制远程 Gateway。</p>
+<h3 id="5-公网暴露（可选）"><a href="#5-公网暴露（可选）" class="headerlink" title="5. 公网暴露（可选）"></a>5. 公网暴露（可选）</h3><p>通过 Tailscale Serve&#x2F;Funnel 安全暴露：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置 gateway.tailscale.mode = &quot;serve&quot; 或 &quot;funnel&quot;</span></span><br><span class="line"><span class="comment"># 需要设置 gateway.auth.mode = &quot;password&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方式四：从源码开发部署"><a href="#方式四：从源码开发部署" class="headerlink" title="方式四：从源码开发部署"></a>方式四：从源码开发部署</h2><p>适合需要修改源码、贡献 PR、或深度定制。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/openclaw/openclaw.git</span><br><span class="line"><span class="built_in">cd</span> openclaw</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">pnpm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 UI</span></span><br><span class="line">pnpm ui:build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建项目</span></span><br><span class="line">pnpm build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行向导并安装 daemon</span></span><br><span class="line">pnpm openclaw onboard --install-daemon</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开发模式（自动重载）</span></span><br><span class="line">pnpm gateway:watch</span><br></pre></td></tr></table></figure>
+
+<h2 id="Agent-沙箱（Sandboxing）"><a href="#Agent-沙箱（Sandboxing）" class="headerlink" title="Agent 沙箱（Sandboxing）"></a>Agent 沙箱（Sandboxing）</h2><p><strong>重要安全特性</strong>：在群聊&#x2F;频道中使用 Agent 时，可启用沙箱隔离。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;agents&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;defaults&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;sandbox&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;non-main&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;scope&quot;</span><span class="punctuation">:</span> <span class="string">&quot;agent&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;workspaceAccess&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;docker&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;image&quot;</span><span class="punctuation">:</span> <span class="string">&quot;openclaw-sandbox:bookworm-slim&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;memory&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1g&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;memorySwap&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2g&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;prune&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;idleHours&quot;</span><span class="punctuation">:</span> <span class="number">24</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;maxAgeDays&quot;</span><span class="punctuation">:</span> <span class="number">7</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="常用命令速查"><a href="#常用命令速查" class="headerlink" title="常用命令速查"></a>常用命令速查</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>openclaw gateway</code></td>
+<td>启动 Gateway</td>
+</tr>
+<tr>
+<td><code>openclaw onboard</code></td>
+<td>运行设置向导</td>
+</tr>
+<tr>
+<td><code>openclaw agent --message &quot;...&quot;</code></td>
+<td>发送消息给 Agent</td>
+</tr>
+<tr>
+<td><code>openclaw message send --to xxx --message &quot;...&quot;</code></td>
+<td>发送渠道消息</td>
+</tr>
+<tr>
+<td><code>openclaw channels login</code></td>
+<td>WhatsApp 扫码</td>
+</tr>
+<tr>
+<td><code>openclaw doctor</code></td>
+<td>健康检查与修复</td>
+</tr>
+<tr>
+<td><code>openclaw status</code></td>
+<td>查看状态</td>
+</tr>
+</tbody></table>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>1. Node 版本不满足要求？</strong><br>使用 nvm 安装 Node 22+：<code>nvm install 22</code></p>
+<p><strong>2. Docker 权限错误？</strong><br>确保挂载目录属于 uid 1000：<code>sudo chown -R 1000:1000 /path/to/openclaw</code></p>
+<p><strong>3. 远程访问 Gateway？</strong><br>使用 SSH 隧道或 Tailscale Serve&#x2F;Funnel</p>
+<p><strong>4. 升级 OpenClaw？</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g openclaw@latest</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>OpenClaw 提供了灵活多样的部署方式，选择适合你的方式，开始打造属于你的个人 AI 助手吧。</p>
+<hr>
+<p><em>参考资料：</em></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/openclaw/openclaw">OpenClaw GitHub</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.openclaw.ai/">OpenClaw 文档</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>YunDuan
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://soooocold.github.io/2026/02/11/OpenClaw-%E9%83%A8%E7%BD%B2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/" title="OpenClaw 部署完全指南：从零搭建你的个人 AI 助手">https://soooocold.github.io/2026/02/11/OpenClaw-部署完全指南/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>CC-ZERO</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/OpenClaw/" rel="tag"># OpenClaw</a>
+              <a href="/tags/AI-Assistant/" rel="tag"># AI Assistant</a>
+              <a href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag"># 部署</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/21/postgre-pgppool2/" rel="prev" title="Postgre高可用配置">
+                  <i class="fa fa-angle-left"></i> Postgre高可用配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="a43ea9c897de2185295b870ad661b97f"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YunDuan</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyxf3v9O3","appkey":"94960132a440cb57ffff1e4bd6418e12","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
